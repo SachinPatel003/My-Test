@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Talent from "./Components/Talent";
+import Nav from "./Components/Nav";
+import Fan from "./Components/Fan";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="bg-black min-vh-100 d-flex justify-content-center align-items-center ">
+        <div className="bg-dark  d-flex justify-content-center align-items-center flex-column py-3 rounded-5 col-10 col-xxl-6 text-white">
+          <BrowserRouter>
+            <Nav />
+            <Routes>
+              <Route path="/" element={<Fan />} />
+              <Route path="/Talent" element={<Talent />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </div>
+    </>
   );
 }
 
