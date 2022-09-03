@@ -10,7 +10,7 @@ function App() {
       <div style={{"fontFamily" :'Poppins'}} className="bg-black min-vh-100 d-flex justify-content-center align-items-center ">
         <div className="bg-dark  d-flex justify-content-center align-items-center flex-column py-3 rounded-5 col-10 col-xxl-6 text-white">
           <BrowserRouter>
-            <Nav />
+            <Nav/>
             <Routes>
               <Route path="/" element={<Fan />} />
               <Route path="/Talent" element={<Talent />} />

@@ -26,7 +26,6 @@ const Talent = () => {
             firstName.classList.add("is-invalid");
             setfirstCheck(false)
         }
-        console.log(firstCheck);
 
         let lastName = document.getElementById("lastName");
         let reg2 = /^[a-zA-Z][0-9a-zA-Z]{2,10}$/;
@@ -37,7 +36,6 @@ const Talent = () => {
             lastName.classList.add("is-invalid");
             setlastCheck(false);
         }
-        console.log(lastCheck);
 
         let userName = document.getElementById("userName");
         let reg3 = /^[a-zA-Z][0-9a-zA-Z]{2,10}$/;
@@ -48,7 +46,6 @@ const Talent = () => {
             userName.classList.add("is-invalid");
             setuserCheck(false);
         }
-        console.log(userCheck);
 
         let emailAdd = document.getElementById("emailAdd");
         let reg4 = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -59,7 +56,6 @@ const Talent = () => {
             emailAdd.classList.add("is-invalid");
             setemailCheck(false);
         }
-        console.log(emailCheck);
 
         let passWord = document.getElementById("passWord");
         let reg5 = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -70,7 +66,6 @@ const Talent = () => {
             passWord.classList.add("is-invalid");
             setpassCheck(false)
         }
-        console.log(passCheck);
 
         let check = document.getElementById("check");
         if (check.checked) {
@@ -82,9 +77,30 @@ const Talent = () => {
         }
 
 
-
         if (firstCheck && lastCheck && userCheck && emailCheck && passCheck && checkbox) {
             setSubmit("-----Submitted Successfully-----")
+
+            let url = "http://wren.in:3200/api/sign-up/talent"
+            // // data1 = { "name": "morpheus", "job": "leader" }
+            let data1 = {first_name: first,last_name: last,username: user,email: email,password: pass,}
+            let params = {
+                method: 'post',
+                body: JSON.stringify(data1),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            fetch(url, params)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((err) => {
+                    console.log("this is error :" + err);
+                })
+
         } else {
             setSubmit("-----Not Submitted-----")
         }
@@ -93,39 +109,39 @@ const Talent = () => {
     return (
         <>
             <div className='col-8 col-xl-5 '>
-                <div className='d-flex justify-content-center my-3 h3'>Create Your Fan Account</div>
+                <div className='d-flex justify-content-center my-3 h3'>Create Your Talent Account</div>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" >First name*</label>
                     <input type="text" value={first} onChange={(e) => setFirst(e.target.value)} id="firstName" className="text-white form-control rounded-pill border-success border border-3 bg-transparent" placeholder="First name" />
-                    <div class="invalid-feedback">The number of characters must be between 3 and 10</div>
+                    <div className="invalid-feedback">The number of characters must be between 3 and 10</div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" >Last name*</label>
                     <input type="text" value={last} onChange={(e) => setLast(e.target.value)} id="lastName" className="text-white form-control border-success border border-3 rounded-pill bg-transparent" placeholder="Last name" />
-                    <div class="invalid-feedback">The number of characters must be between 2 and 10</div>
+                    <div className="invalid-feedback">The number of characters must be between 2 and 10</div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" >User name*</label>
                     <input type="text" value={user} onChange={(e) => setUser(e.target.value)} id="userName" className="text-white form-control border-success border border-3 rounded-pill bg-transparent" placeholder="User name" />
-                    <div class="invalid-feedback">The number of characters must be between 2 and 10</div>
+                    <div className="invalid-feedback">The number of characters must be between 2 and 10</div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" >Email*</label>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id="emailAdd" className="text-white form-control border-success border border-3 rounded-pill bg-transparent" placeholder="Email" />
-                    <div class="invalid-feedback">Please put valid email ID</div>
+                    <div className="invalid-feedback">Please put valid email ID</div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" >Password*</label>
                     <input type="text" value={pass} onChange={(e) => setPass(e.target.value)} id="passWord" className="text-white form-control border-success border border-3 rounded-pill bg-transparent" placeholder="Password" />
-                    <div class="invalid-feedback">The number of characters must be between 6 and 16</div>
+                    <div className="invalid-feedback">The number of characters must be between 6 and 16</div>
                 </div>
                 <div>
                     <input className="form-check-input mx-2" type="checkbox" value="" id="check" />
                     <label className="form-check-label" htmlFor="check">I agree to the <span className='text-success'>Terms and Conditions.</span></label>
-                    <div class="invalid-feedback">You must agree before submitting.</div>
+                    <div className="invalid-feedback">You must agree before submitting.</div>
                 </div>
                 <div className='d-flex justify-content-center my-3'>
-                    <button id='btn' onClick={btn} className="btn rounded-pill btn-success me-2" type="button">
+                    <button onClick={btn} className="btn rounded-pill btn-success me-2" type="button">
                         {submit}
                     </button>
                 </div>
